@@ -1,0 +1,10 @@
+Call:
+   aov(formula = gsiList ~ type, data = tempStatDataframe)
+
+Terms:
+                     type Residuals
+Sum of Squares   74.20707 143.69660
+Deg. of Freedom         3      2396
+
+Residual standard error: 0.244895
+Estimated effects may be unbalanced

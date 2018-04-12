@@ -183,39 +183,35 @@ graphGSIByStrength("first")
 # lightPlot
 
 
-calculateWithinStats <- function(file25, file50, file75, file100, title, whichPhase) {
+# Runs ANOVA for within behavior differences in GSI between behavior strengths. 
+calculateWithinANOVAstats <- function(file25, file50, file75, file100, title, whichPhase) {
 
-
-
-      
-
-      # length(temp25)
 
       if(whichPhase == "first") {
-        temp25 <- c(file25$Trial1[1:200], file25$Trial3[1:200], file25$Trial3[1:200])
-        temp50 <- c(file50$Trial1[1:200], file50$Trial3[1:200], file50$Trial3[1:200])
-        temp75 <- c(file75$Trial1[1:200], file75$Trial3[1:200], file75$Trial3[1:200])
+        temp25 <- c(file25$Trial1[1:200], file25$Trial2[1:200], file25$Trial3[1:200])
+        temp50 <- c(file50$Trial1[1:200], file50$Trial2[1:200], file50$Trial3[1:200])
+        temp75 <- c(file75$Trial1[1:200], file75$Trial2[1:200], file75$Trial3[1:200])
         temp100 <- c(file100$Trial1[1:200], file100$Trial3[1:200], file100$Trial3[1:200])
        
         tempLabel <- c(rep("str25",600),rep("str50",600),rep("str75", 600),rep("str100",600))
         tempTotal <- c(temp25[1:600],temp50[1:600],temp75[1:600],temp100[1:600])
 
       } else if (whichPhase =="second") {
-        temp25 <- c(file25$Trial1[200:800], file25$Trial3[200:800], file25$Trial3[200:800])
-        temp50 <- c(file50$Trial1[200:800], file50$Trial3[200:800], file50$Trial3[200:800])
-        temp75 <- c(file75$Trial1[200:800], file75$Trial3[200:800], file75$Trial3[200:800])
+        temp25 <- c(file25$Trial1[200:800], file25$Trial2[200:800], file25$Trial3[200:800])
+        temp50 <- c(file50$Trial1[200:800], file50$Trial2[200:800], file50$Trial3[200:800])
+        temp75 <- c(file75$Trial1[200:800], file75$Trial2[200:800], file75$Trial3[200:800])
         temp100 <- c(file100$Trial1[200:800], file100$Trial3[200:800], file100$Trial3[200:800])
         
 
-         tempLabel <- c(rep("str25",1800),rep("str50",1800),rep("str75", 1800),rep("str100",1800))
+        tempLabel <- c(rep("str25",1800),rep("str50",1800),rep("str75", 1800),rep("str100",1800))
         tempTotal <- c(temp25[1:1800],temp50[1:1800],temp75[1:1800],temp100[1:1800])
 
       } else if( whichPhase =="full") {
 
-        temp25 <- c(file25$Trial1, file25$Trial3, file25$Trial3)
-        temp50 <- c(file50$Trial1, file50$Trial3, file50$Trial3)
-        temp75 <- c(file75$Trial1, file75$Trial3, file75$Trial3)
-        temp100 <- c(file100$Trial1, file100$Trial3, file100$Trial3)
+        temp25 <- c(file25$Trial1, file25$Trial2, file25$Trial3)
+        temp50 <- c(file50$Trial1, file50$Trial2, file50$Trial3)
+        temp75 <- c(file75$Trial1, file75$Trial2, file75$Trial3)
+        temp100 <- c(file100$Trial1, file100$Trial2, file100$Trial3)
 
 
         tempLabel <- c(rep("str25",2400),rep("str50",2400),rep("str75", 2400),rep("str100",2400))
@@ -223,93 +219,186 @@ calculateWithinStats <- function(file25, file50, file75, file100, title, whichPh
       }
      
       # length(tempTotal)
-
-      lightStats <- data.frame(
-        # str25 = temp25[1:2400],
-        # str50 = temp50[1:2400],
-        # str75 = temp75[1:2400],
-        # str100 = temp100[1:2400],
-        type = tempLabel,
-        gsiList = tempTotal
-      )
+      # if(betweenORwithin == "within") {
+        tempStatDataframe <- data.frame(
+          type = tempLabel,
+          gsiList = tempTotal
+        )
 
 
-    fit <- aov(gsiList ~ type, data=lightStats)
+        fit <- aov(gsiList ~ type, data=tempStatDataframe)
 
-    txtSumName <- paste("./",title,"_Anova_summary.txt")
-    txtResultsName <- paste("./",title,"_Anova_results.txt")
-    txtPostHocName <- paste("./",title,"_Anova_PostHoc.txt")
+        txtSumName <- paste("./",title,"_Anova_summary.txt")
+        txtResultsName <- paste("./",title,"_Anova_results.txt")
+        txtPostHocName <- paste("./",title,"_Anova_PostHoc.txt")
 
-    capture_a <- summary(fit)
-    capture.output(capture_a, file = txtSumName)
-    capture_b <- fit
-    capture.output(capture_b, file = txtResultsName)
-    capture_c <- fit
-    capture.output(capture_c, file = txtPostHocName)
+        capture_a <- summary(fit)
+        capture.output(capture_a, file = txtSumName)
+        capture_b <- fit
+        capture.output(capture_b, file = txtResultsName)
+        postHoc <- TukeyHSD(fit)
+        capture_c <- postHoc
+        capture.output(capture_c, file = txtPostHocName)
 
-    postHoc <- TukeyHSD(fit)
+        # postHoc <- TukeyHSD(fit)
 
-    fit
-    postHoc
-    graphed <- plot(postHoc)
-    
-    graphed 
-    
-    # fileLoc <- "./results.txt"
-    # toWrite <- ""
-    # #sumOfStats <- summary(fit)
-    # toWrite <- paste(toWrite, fit , "\t")
-
-    # toWrite <- paste(toWrite,model.tables(fit,"means"),"\t")
-    #print(model.tables(fit,"effects"))
-    # write.table(toWrite, fileLoc, sep="\t")
+        fit
+        postHoc
+        graphed <- plot(postHoc)
+        
+        graphed 
 }
 
 
-# calculateAcrossStats
+calculateBetweenANOVAstats <- function(attractfile25, attractfile50, attractfile75, attractfile100, alignfile25, alignfile50, alignfile75, alignfile100, lightfile25, lightfile50, lightfile75, lightfile100, avoidancefile25, avoidancefile50, avoidancefile75, avoidancefile100, boidfile25, boidfile50, boidfile75, boidfile100, whichPhase,title1) {
+
+    if(whichPhase == "first") {
+        attracttemp25 <- c(attractfile25$Trial1[1:200], attractfile25$Trial2[1:200], attractfile25$Trial3[1:200])
+        attracttemp50 <- c(attractfile50$Trial1[1:200], attractfile50$Trial2[1:200], attractfile50$Trial3[1:200])
+        attracttemp75 <- c(attractfile75$Trial1[1:200], attractfile75$Trial2[1:200], attractfile75$Trial3[1:200])
+        attracttemp100 <- c(attractfile100$Trial1[1:200], attractfile100$Trial3[1:200], attractfile100$Trial3[1:200])
+
+        aligntemp25 <- c(alignfile25$Trial1[1:200], alignfile25$Trial2[1:200], alignfile25$Trial3[1:200])
+        aligntemp50 <- c(alignfile50$Trial1[1:200], alignfile50$Trial2[1:200], alignfile50$Trial3[1:200])
+        aligntemp75 <- c(alignfile75$Trial1[1:200], alignfile75$Trial2[1:200], alignfile75$Trial3[1:200])
+        aligntemp100 <- c(alignfile100$Trial1[1:200], alignfile100$Trial3[1:200], alignfile100$Trial3[1:200])
+
+        lighttemp25 <- c(lightfile25$Trial1[1:200], lightfile25$Trial2[1:200], lightfile25$Trial3[1:200])
+        lighttemp50 <- c(lightfile50$Trial1[1:200], lightfile50$Trial2[1:200], lightfile50$Trial3[1:200])
+        lighttemp75 <- c(lightfile75$Trial1[1:200], lightfile75$Trial2[1:200], lightfile75$Trial3[1:200])
+        lighttemp100 <- c(lightfile100$Trial1[1:200], lightfile100$Trial3[1:200], lightfile100$Trial3[1:200])
+
+        avoidtemp25 <- c(avoidancefile25$Trial1[1:200], avoidancefile25$Trial2[1:200], avoidancefile25$Trial3[1:200])
+        avoidtemp50 <- c(avoidancefile50$Trial1[1:200], avoidancefile50$Trial2[1:200], avoidancefile50$Trial3[1:200])
+        avoidtemp75 <- c(avoidancefile75$Trial1[1:200], avoidancefile75$Trial2[1:200], avoidancefile75$Trial3[1:200])
+        avoidtemp100 <- c(avoidancefile100$Trial1[1:200], avoidancefile100$Trial3[1:200], avoidancefile100$Trial3[1:200])
+
+        boidtemp25 <- c(boidfile25$Trial1[1:200], boidfile25$Trial2[1:200], boidfile25$Trial3[1:200])
+        boidtemp50 <- c(boidfile50$Trial1[1:200], boidfile50$Trial2[1:200], boidfile50$Trial3[1:200])
+        boidtemp75 <- c(boidfile75$Trial1[1:200], boidfile75$Trial2[1:200], boidfile75$Trial3[1:200])
+        boidtemp100 <- c(boidfile100$Trial1[1:200], boidfile100$Trial3[1:200], boidfile100$Trial3[1:200])
+
+       
+        tempLabel <- c(rep("attract25",600),rep("align25",600),rep("light25", 600),rep("avoid25",600),rep("boid25",600),
+                       rep("attract50",600),rep("align50",600),rep("light50", 600),rep("avoid50",600),rep("boid50",600),
+                       rep("attract75",600),rep("align75",600),rep("light75", 600),rep("avoid75",600),rep("boid75",600),
+                       rep("attract100",600),rep("align100",600),rep("light100", 600),rep("avoid100",600),rep("boid100",600) )
+        tempTotal <- c(attracttemp25[1:600], aligntemp25[1:600],lighttemp25[1:600],avoidtemp25[1:600],boidtemp25[1:600],
+                        attracttemp50[1:600], aligntemp50[1:600],lighttemp50[1:600],avoidtemp50[1:600],boidtemp50[1:600],
+                        attracttemp75[1:600], aligntemp75[1:600],lighttemp75[1:600],avoidtemp75[1:600],boidtemp75[1:600],
+                        attracttemp100[1:600], aligntemp100[1:600],lighttemp100[1:600],avoidtemp100[1:600],boidtemp100[1:600])
+
+      } else if (whichPhase =="second") {
+
+        attracttemp25 <- c(attractfile25$Trial1[200:800], attractfile25$Trial2[200:800], attractfile25$Trial3[200:800])
+        attracttemp50 <- c(attractfile50$Trial1[200:800], attractfile50$Trial2[200:800], attractfile50$Trial3[200:800])
+        attracttemp75 <- c(attractfile75$Trial1[200:800], attractfile75$Trial2[200:800], attractfile75$Trial3[200:800])
+        attracttemp100 <- c(attractfile100$Trial1[200:800], attractfile100$Trial3[200:800], attractfile100$Trial3[200:800])
+        
+        aligntemp25 <- c(alignfile25$Trial1[200:800], alignfile25$Trial2[200:800], alignfile25$Trial3[200:800])
+        aligntemp50 <- c(alignfile50$Trial1[200:800], alignfile50$Trial2[200:800], alignfile50$Trial3[200:800])
+        aligntemp75 <- c(alignfile75$Trial1[200:800], alignfile75$Trial2[200:800], alignfile75$Trial3[200:800])
+        aligntemp100 <- c(alignfile100$Trial1[200:800], alignfile100$Trial3[200:800], alignfile100$Trial3[200:800])
+
+        lighttemp25 <- c(lightfile25$Trial1[200:800], lightfile25$Trial2[200:800], lightfile25$Trial3[200:800])
+        lighttemp50 <- c(lightfile50$Trial1[200:800], lightfile50$Trial2[200:800], lightfile50$Trial3[200:800])
+        lighttemp75 <- c(lightfile75$Trial1[200:800], lightfile75$Trial2[200:800], lightfile75$Trial3[200:800])
+        lighttemp100 <- c(lightfile100$Trial1[200:800], lightfile100$Trial3[200:800], lightfile100$Trial3[200:800])
+
+        avoidtemp25 <- c(avoidancefile25$Trial1[200:800], avoidancefile25$Trial2[200:800], avoidancefile25$Trial3[200:800])
+        avoidtemp50 <- c(avoidancefile50$Trial1[200:800], avoidancefile50$Trial2[200:800], avoidancefile50$Trial3[200:800])
+        avoidtemp75 <- c(avoidancefile75$Trial1[200:800], avoidancefile75$Trial2[200:800], avoidancefile75$Trial3[200:800])
+        avoidtemp100 <- c(avoidancefile100$Trial1[200:800], avoidancefile100$Trial3[200:800], avoidancefile100$Trial3[200:800])
+
+        boidtemp25 <- c(boidfile25$Trial1[200:800], boidfile25$Trial2[200:800], boidfile25$Trial3[200:800])
+        boidtemp50 <- c(boidfile50$Trial1[200:800], boidfile50$Trial2[200:800], boidfile50$Trial3[200:800])
+        boidtemp75 <- c(boidfile75$Trial1[200:800], boidfile75$Trial2[200:800], boidfile75$Trial3[200:800])
+        boidtemp100 <- c(boidfile100$Trial1[200:800], boidfile100$Trial3[200:800], boidfile100$Trial3[200:800])
 
       
-      # print(temp25)
+        tempLabel <- c(rep("attract25",1800),rep("align25",1800),rep("ligh25", 1800),rep("avoid25",1800) ,rep("boid25",1800) ,
+                       rep("attract50",1800),rep("align50",1800),rep("light50", 1800),rep("avoid50",1800), rep("boid50",1800),
+                       rep("attract75",1800),rep("align75",1800),rep("light75", 1800),rep("avoid75",1800), rep("boid75",1800),
+                       rep("attract100",1800),rep("align100",1800),rep("light100", 1800),rep("avoid100",1800), rep("boid100",1800))
+
+        # tempTotal <- c(temp25[1:1800],temp50[1:1800],temp75[1:1800],temp100[1:1800])
+
+        tempTotal <- c(attracttemp25[1:1800], aligntemp25[1:1800],lighttemp25[1:1800],avoidtemp25[1:1800],boidtemp25[1:1800],
+                        attracttemp50[1:1800], aligntemp50[1:1800],lighttemp50[1:1800],avoidtemp50[1:1800],boidtemp50[1:1800],
+                        attracttemp75[1:1800], aligntemp75[1:1800],lighttemp75[1:1800],avoidtemp75[1:1800],boidtemp75[1:1800],
+                        attracttemp100[1:1800], aligntemp100[1:1800],lighttemp100[1:1800],avoidtemp100[1:1800],boidtemp100[1:1800])
+
+      } else if( whichPhase =="full") {
+
+        temp25 <- c(file25$Trial1, file25$Trial2, file25$Trial3)
+        temp50 <- c(file50$Trial1, file50$Trial2, file50$Trial3)
+        temp75 <- c(file75$Trial1, file75$Trial2, file75$Trial3)
+        temp100 <- c(file100$Trial1, file100$Trial2, file100$Trial3)
 
 
-    
-calculateWithinStats(alignment_25.data, alignment_5.data, alignment_75.data, alignment_100.data, "alignStatsResults", "first")
-
-calculateWithinStats(attraction_25.data, attraction_5.data, attraction_75.data, attraction_100.data, "attractionStatsResults", "first")
-
-calculateWithinStats(avoidance_25.data, avoidance_5.data, avoidance_75.data, avoidance_100.data, "avoidanceStatsResults", "first")
-
-calculateWithinStats(light_25.data, light_5.data, light_75.data, light_100.data, "lightStatsResults", "first")
-
-calculateWithinStats(boid_25.data, boid_5.data, boid_75.data, boid_100.data, "boidStatsResults", "first")
-    # y <- A
-    # One Way Anova (Completely Randomized Design)
-    
-# graphGSIByStrength("second")
-
-# lightPlot
+        tempLabel <- c(rep("str25",2400),rep("str50",2400),rep("str75", 2400),rep("str100",2400))
+        tempTotal <- c(temp25[1:2400],temp50[1:2400],temp75[1:2400],temp100[1:2400])
+      }
+     
+      # length(tempTotal)
+      # if(betweenORwithin == "within") {
+        tempStatDataframe <- data.frame(
+          type = tempLabel,
+          gsiList = tempTotal
+        )
 
 
+        fit <- aov(gsiList ~ type, data=tempStatDataframe)
 
-# GSI_behaviorVal5 <-
-#   data.frame(
-#     AVOID <- GSI_avoid5,
-#     ALIGN <- GSI_align5,
-#     BOID <- GSI_boid5,
-#     LIGHT <- GSI_attract5,
-#     ATTRACTION <- GSI_attract5,
-#     Time <- 1:800
-#   )
+        txtSumName <- paste("./",title1,"_Anova_summary.txt")
+        txtResultsName <- paste("./",title1,"_Anova_results.txt")
+        txtPostHocName <- paste("./",title1,"_Anova_PostHoc.txt")
+
+        capture_a <- summary(fit)
+        capture.output(capture_a, file = txtSumName)
+        capture_b <- fit
+        capture.output(capture_b, file = txtResultsName)
+        postHoc <- TukeyHSD(fit)
+        capture_c <- postHoc
+        capture.output(capture_c, file = txtPostHocName)
+
+        
+
+        fit
+        postHoc
+        graphed <- plot(postHoc)
+        
+        graphed 
+
+}
+
+
+PerformWithinStats <- function(phase) {
+  calculateWithinANOVAstats(alignment_25.data, alignment_5.data, alignment_75.data, alignment_100.data, "alignStatsResults", phase)
+  calculateWithinANOVAstats(attraction_25.data, attraction_5.data, attraction_75.data, attraction_100.data, "attractionStatsResults", phase)
+  calculateWithinANOVAstats(avoidance_25.data, avoidance_5.data, avoidance_75.data, avoidance_100.data, "avoidanceStatsResults", phase)
+  calculateWithinANOVAstats(light_25.data, light_5.data, light_75.data, light_100.data, "lightStatsResults", phase)
+  calculateWithinANOVAstats(boid_25.data, boid_5.data, boid_75.data, boid_100.data, "boidStatsResults", phase)
+
+} 
+  
+
+PerformBetweenStats <- function(phase) {
+  # attract align light avoidance boid 
+  calculateBetweenANOVAstats(
+    attraction_25.data,attraction_5.data,attraction_75.data,attraction_100.data,
+    alignment_25.data,alignment_5.data,alignment_75.data,alignment_100.data, 
+    light_25.data,light_5.data, light_75.data,light_100.data, 
+    avoidance_25.data,avoidance_5.data,avoidance_75.data,avoidance_100.data,
+    boid_25.data,boid_5.data,boid_75.data,boid_100.data, phase, "WithinPhase_CrossBehavior"
+    )
+}  
 
 
 
-# GSIbehaviors5 <- ggplot(GSI_behaviorVal5, aes(Time, y <- GSI)) + 
-#   geom_line(aes(y <- GSI_avoid5, colour <- "AVOIDANCE"), size =2) +  
-#   geom_line(aes(y <- GSI_align5, colour <- "ALIGNMENT"), size =2)+ 
-#   geom_line(aes(y <- GSI_boid5, colour <- "BOID"), size =2) +
-#   geom_line(aes(y <- GSI_attract5, colour <- "ATTRACTION"), size =2) +
-#   geom_line(aes(y <- GSI_light5, colour <- "LIGHT"), size =2)
+PerformBetweenStats("first")
+PerformWithinStats("second")
 
-# GSIbehaviors5 + ggtitle("Behavior Stabilities")
+
 
 

@@ -1,0 +1,14 @@
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = gsiList ~ type, data = tempStatDataframe)
+
+$type
+                   diff        lwr         upr p adj
+str25-str100  0.4791195  0.4427704  0.51546858     0
+str50-str100  0.2926057  0.2562566  0.32895475     0
+str75-str100  0.1604617  0.1241126  0.19681074     0
+str50-str25  -0.1865138 -0.2228629 -0.15016474     0
+str75-str25  -0.3186578 -0.3550069 -0.28230875     0
+str75-str50  -0.1321440 -0.1684931 -0.09579493     0
+
