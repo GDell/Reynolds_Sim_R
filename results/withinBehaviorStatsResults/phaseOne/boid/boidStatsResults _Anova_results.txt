@@ -1,0 +1,10 @@
+Call:
+   aov(formula = gsiList ~ type, data = lightStats)
+
+Terms:
+                     type Residuals
+Sum of Squares   41.41302 243.32999
+Deg. of Freedom         3      2396
+
+Residual standard error: 0.3186797
+Estimated effects may be unbalanced
