@@ -1,5 +1,7 @@
-               Df Sum Sq Mean Sq F value Pr(>F)    
-type           19  250.6  13.188   203.3 <2e-16 ***
-Residuals   11980  777.1   0.065                   
+                     Df Sum Sq Mean Sq F value Pr(>F)    
+strength              3   38.3  12.769  156.67 <2e-16 ***
+behavior              4   75.2  18.789  230.53 <2e-16 ***
+strength:behavior    12   36.9   3.072   37.69 <2e-16 ***
+Residuals         35980 2932.6   0.082                   
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

@@ -1,10 +1,10 @@
 Call:
-   aov(formula = gsiList ~ type, data = tempStatDataframe)
+   aov(formula = gsiList ~ strength * behavior, data = tempStatDataframe)
 
 Terms:
-                    type Residuals
-Sum of Squares  250.5641  777.0647
-Deg. of Freedom       19     11980
+                 strength  behavior strength:behavior Residuals
+Sum of Squares    38.3076   75.1566           36.8630 2932.5591
+Deg. of Freedom         3         4                12     35980
 
-Residual standard error: 0.2546831
+Residual standard error: 0.2854913
 Estimated effects may be unbalanced
