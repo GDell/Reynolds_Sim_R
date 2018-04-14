@@ -1,46 +1,67 @@
+# Load GGPLOT2 for creating figures and graphs.
 library(ggplot2)
+#         VALIDATION DATA
+# ALIGN
+alignment_25.data <- read.csv(file="./data/individualBehaviors/alignment/align25Validation.csv")
+alignment_5.data <- read.csv(file="./data/individualBehaviors/alignment/align50Validation.csv")
+alignment_75.data <- read.csv(file="./data/individualBehaviors/alignment/align75Validation.csv")
+alignment_100.data <- read.csv(file="./data/individualBehaviors/alignment/align100Validation.csv")
+#AVOID
+avoidance_25.data <- read.csv(file="./data/individualBehaviors/avoidance/avoidance25Validation.csv")
+avoidance_5.data <- read.csv(file="./data/individualBehaviors/avoidance/avoidance50Validation.csv")
+avoidance_75.data <- read.csv(file="./data/individualBehaviors/avoidance/avoidance75Validation.csv")
+avoidance_100.data <- read.csv(file="./data/individualBehaviors/avoidance/avoidance100Validation.csv")
+#ATTRACT
+attraction_25.data <- read.csv(file="./data/individualBehaviors/attraction/attraction25Validation.csv")
+attraction_5.data <- read.csv(file="./data/individualBehaviors/attraction/attraction50Validation.csv")
+attraction_75.data <- read.csv(file="./data/individualBehaviors/attraction/attraction75Validation.csv")
+attraction_100.data <- read.csv(file="./data/individualBehaviors/attraction/attraction100Validation.csv")
+#LIGHT
+light_25.data <- read.csv(file="./data/individualBehaviors/lightAttraction/light25Validation.csv")
+light_5.data <- read.csv(file="./data/individualBehaviors/lightAttraction/light50Validation.csv")
+light_75.data <- read.csv(file="./data/individualBehaviors/lightAttraction/light75Validation.csv")
+light_100.data <- read.csv(file="./data/individualBehaviors/lightAttraction/light100Validation.csv")
+#BOID
+boid_25.data <- read.csv(file="./data/individualBehaviors/boidSim/boid50Validation.csv")
+boid_5.data <- read.csv(file="./data/individualBehaviors/boidSim/boid25Validation.csv")
+boid_75.data <- read.csv(file="./data/individualBehaviors/boidSim/boid75Validation.csv")
+boid_100.data <- read.csv(file="./data/individualBehaviors/boidSim/boid100Validation.csv")
 
-alignment_25.data <- read.csv(file="./data/alignment/align25Validation.csv")
-alignment_5.data <- read.csv(file="./data/alignment/align50Validation.csv")
-alignment_75.data <- read.csv(file="./data/alignment/align75Validation.csv")
-alignment_100.data <- read.csv(file="./data/alignment/align100Validation.csv")
+#         INTERACTION DATA
 
+alignXlight_25.data <-read.csv("./data/pairedBehaviors/alignXlight/interaction25Validation.csv")
+alignXlight_5.data <-read.csv("./data/pairedBehaviors/alignXlight/interaction50Validation.csv")
+alignXlight_75.data <-read.csv("./data/pairedBehaviors/alignXlight/interaction75Validation.csv")
+alignXlight_100.data <-read.csv("./data/pairedBehaviors/alignXlight/interaction100Validation.csv")
 
-alignmentDataCollection <- c(alignment_25.data, alignment_5.data, alignment_75.data, alignment_100.data)
+attractXlight_25.data <- read.csv("./data/pairedBehaviors/attractionXlight/interaction25Validation.csv")
+attractXlight_5.data <- read.csv("./data/pairedBehaviors/attractionXlight/interaction50Validation.csv")
+attractXlight_75.data <- read.csv("./data/pairedBehaviors/attractionXlight/interaction75Validation.csv")
+attractXlight_100.data <- read.csv("./data/pairedBehaviors/attractionXlight/interaction100Validation.csv")
 
+attractXalign_25.data <- read.csv("./data/pairedBehaviors/attractXalign/interaction25Validation.csv")
+attractXalign_5.data <- read.csv("./data/pairedBehaviors/attractXalign/interaction50Validation.csv")
+attractXalign_75.data <- read.csv("./data/pairedBehaviors/attractXalign/interaction75Validation.csv")
+attractXalign_100.data <- read.csv("./data/pairedBehaviors/attractXalign/interaction100Validation.csv")
 
-avoidance_25.data <- read.csv(file="./data/avoidance/avoidance25Validation.csv")
-avoidance_5.data <- read.csv(file="./data/avoidance/avoidance50Validation.csv")
-avoidance_75.data <- read.csv(file="./data/avoidance/avoidance75Validation.csv")
-avoidance_100.data <- read.csv(file="./data/avoidance/avoidance100Validation.csv")
+attractXavoid_25.data <- read.csv("./data/pairedBehaviors/attractXavoid/interaction25Validation.csv")
+attractXavoid_5.data <- read.csv("./data/pairedBehaviors/attractXavoid/interaction50Validation.csv")
+attractXavoid_75.data <- read.csv("./data/pairedBehaviors/attractXavoid/interaction75Validation.csv")
+attractXavoid_100.data <- read.csv("./data/pairedBehaviors/attractXavoid/interaction100Validation.csv")
 
-avoidanceDataCollection <- c(avoidance_25.data, avoidance_5.data, avoidance_75.data, avoidance_100.data)
+avoidXlight_25.data <- read.csv("./data/pairedBehaviors/avoidXlight/interaction25Validation.csv")
+avoidXlight_5.data <- read.csv("./data/pairedBehaviors/avoidXlight/interaction50Validation.csv")
+avoidXlight_75.data <- read.csv("./data/pairedBehaviors/avoidXlight/interaction75Validation.csv")
+avoidXlight_100.data <- read.csv("./data/pairedBehaviors/avoidXlight/interaction100Validation.csv")
 
-attraction_25.data <- read.csv(file="./data/attraction/attraction25Validation.csv")
-attraction_5.data <- read.csv(file="./data/attraction/attraction50Validation.csv")
-attraction_75.data <- read.csv(file="./data/attraction/attraction75Validation.csv")
-attraction_100.data <- read.csv(file="./data/attraction/attraction100Validation.csv")
-
-attractionDataCollection <- c(attraction_25.data, attraction_5.data, attraction_75.data, attraction_100.data)
-
-light_25.data <- read.csv(file="./data/lightAttraction/light25Validation.csv")
-light_5.data <- read.csv(file="./data/lightAttraction/light50Validation.csv")
-light_75.data <- read.csv(file="./data/lightAttraction/light75Validation.csv")
-light_100.data <- read.csv(file="./data/lightAttraction/light100Validation.csv")
-
-lightDataCollection <- c(light_25.data, light_5.data, light_75.data, light_100.data)
-
-boid_25.data <- read.csv(file="./data/boidSim/boid50Validation.csv")
-boid_5.data <- read.csv(file="./data/boidSim/boid25Validation.csv")
-boid_75.data <- read.csv(file="./data/boidSim/boid75Validation.csv")
-boid_100.data <- read.csv(file="./data/boidSim/boid100Validation.csv")
-
-boidDataCollection <- c(boid_25.data, boid_5.data, boid_75.data, boid_100.data)
+avoidXalign_25.data <- read.csv("./data/pairedBehaviors/avoidXalign/interaction25Validation.csv")
+avoidXalign_5.data <- read.csv("./data/pairedBehaviors/avoidXalign/interaction50Validation.csv")
+avoidXalign_75.data <-read.csv("./data/pairedBehaviors/avoidXalign/interaction75Validation.csv")
+avoidXalign_100.data <-read.csv("./data/pairedBehaviors/avoidXalign/interaction100Validation.csv")
 
 
 
-
-
+# Returns the average and STdev of the three trials in a behaviorSTRENGTHValidation.csv
 returnTrialAvg <- function(dataEx, whichPhase) {
   overallAvg <- NA
   stdev <- NA
@@ -137,6 +158,148 @@ graphGSIByStrength <- function(whichPhase) {
 
   # boidPlotData <- c(boid25result, boid50result, boid75result, boid100result)
 
+  # INTERACTION
+  attractXlight25result <- returnTrialAvg(attractXlight_25.data, phase)
+  attractXlight50result <- returnTrialAvg(attractXlight_5.data, phase)
+  attractXlight75result <- returnTrialAvg(attractXlight_75.data, phase)
+  attractXlight100result <- returnTrialAvg(attractXlight_100.data, phase)
+
+  attractXlight25 <- attractXlight25result[1]
+  attractXlight50 <- attractXlight50result[1]
+  attractXlight75 <- attractXlight75result[1]
+  attractXlight100 <- attractXlight100result[1]
+
+  STDattractXlight25 <- attractXlight25result[2]
+  STDattractXlight50 <- attractXlight50result[2]
+  STDattractXlight75 <- attractXlight75result[2]
+  STDattractXlight100 <- attractXlight100result[2]
+
+
+  attractXlightlog <- c(NA, attractXlight25, attractXlight50, attractXlight75, attractXlight100)
+  attractXlightSTDlog <- c(NA, STDattractXlight25, STDattractXlight50,STDattractXlight75,STDattractXlight100)
+
+  alignXlighttemp25 <- returnTrialAvg(alignXlight_25.data, phase)
+  alignXlighttemp50 <- returnTrialAvg(alignXlight_5.data, phase)
+  alignXlightemp75 <- returnTrialAvg(alignXlight_75.data, phase)
+  alignXlighttemp100 <- returnTrialAvg(alignXlight_100.data, phase)
+
+  alignXlight25 <- alignXlighttemp25[1]
+  alignXlight50 <- alignXlighttemp50[1]
+  alignXlight75 <- alignXlightemp75[1]
+  alignXlight100 <- alignXlighttemp100[1]
+
+  STDalignXlight25 <- alignXlighttemp25[2]
+  STDalignXlight50 <- alignXlighttemp50[2]
+  STDalignXlight75 <- alignXlightemp75[2]
+  STDalignXlight100 <- alignXlighttemp100[2]
+
+  alignXlightlog <- c(NA, alignXlight25, alignXlight50, alignXlight75, alignXlight100)
+  alignXlightSTDlog <- c(NA, STDalignXlight25, STDalignXlight50, STDalignXlight75, STDalignXlight100)
+
+  attractXaligntemp25 <- returnTrialAvg(attractXalign_25.data, phase)
+  attractXaligntemp50 <- returnTrialAvg(attractXalign_5.data, phase)
+  attractXaligntemp75 <- returnTrialAvg(attractXalign_75.data, phase)
+  attractXaligntemp100 <- returnTrialAvg(attractXalign_100.data, phase)
+
+  attractXalign25 <- attractXaligntemp25[1]
+  attractXalign50 <-attractXaligntemp50[1]
+  attractXalign75 <- attractXaligntemp75[1]
+  attractXalign100 <- attractXaligntemp100[1]
+
+  STDattractXalign25 <- attractXalign25[2]
+  STDattractXalign50 <-attractXaligntemp50[2]
+  STDattractXalign75 <- attractXaligntemp75[2]
+  STDattractXalign100 <- attractXaligntemp100[2]
+
+  attractXalignlog <- c(NA, attractXalign25, attractXalign50, attractXalign75, attractXalign100)
+  attractXalignSTDlog <- c(NA, STDattractXalign25, STDattractXalign50, STDattractXalign75, STDattractXalign100)
+
+  attractXavoidtemp25 <- returnTrialAvg(attractXavoid_25.data, phase)
+  attractXavoidtemp50 <- returnTrialAvg(attractXavoid_5.data, phase)
+  attractXavoidtemp75 <- returnTrialAvg(attractXavoid_75.data, phase)
+  attractXavoidtemp100 <- returnTrialAvg(attractXavoid_100.data, phase)
+
+  attractXavoid25 <- attractXavoidtemp25[1]
+  attractXavoid50 <- attractXavoidtemp50[1]
+  attractXavoid75 <- attractXavoidtemp75[1]
+  attractXavoid100 <- attractXavoidtemp100[1]
+
+  STDattractXavoid25 <- attractXavoidtemp25[2]
+  STDattractXavoid50 <- attractXavoidtemp50[2]
+  STDattractXavoid75 <- attractXavoidtemp75[2]
+  STDattractXavoid100 <- attractXavoidtemp100[2]
+
+
+  attractXavoidlog <- c(NA, attractXavoid25, attractXavoid50, attractXavoid75, attractXavoid100)
+  attractXavoidSTDlog <- c(NA, STDattractXavoid25, STDattractXavoid50, STDattractXavoid75, STDattractXavoid100)
+
+  avoidXaligntemp25 <-returnTrialAvg(avoidXalign_25.data, phase)
+  avoidXaligntemp50 <- returnTrialAvg(avoidXalign_5.data, phase)
+  avoidXaligntemp75 <- returnTrialAvg(avoidXalign_75.data, phase)
+  avoidXaligntemp100 <- returnTrialAvg(avoidXalign_100.data, phase)
+
+  avoidXalign25 <- avoidXaligntemp25[1]
+  avoidXalign50 <- avoidXaligntemp50[1]
+  avoidXalign75 <- avoidXaligntemp75[1]
+  avoidXalign100 <- avoidXaligntemp100[1]
+
+  STDavoidXalign25 <- avoidXaligntemp25[2]
+  STDavoidXalign50 <- avoidXaligntemp50[2]
+  STDavoidXalign75 <- avoidXaligntemp75[2]
+  STDavoidXalign100 <- avoidXaligntemp100[2]
+
+  avoidXalignlog <- c(NA, avoidXalign25, avoidXalign50, avoidXalign75, avoidXalign100)
+  avoidXalignSTDlog <- c(NA, STDavoidXalign25, STDavoidXalign50, STDavoidXalign75, STDavoidXalign100)
+
+  avoidXlighttemp25 <- returnTrialAvg(avoidXlight_25.data, phase)
+  avoidXlighttemp50 <- returnTrialAvg(avoidXlight_5.data, phase)
+  avoidXlighttemp75 <- returnTrialAvg(avoidXlight_75.data, phase)
+  avoidXlighttemp100 <- returnTrialAvg(avoidXlight_100.data, phase)
+
+  avoidXlight25 <- avoidXlighttemp25[1]
+  avoidXlight50 <-avoidXlighttemp50[1]
+  avoidXlight75 <-avoidXlighttemp75[1]
+  avoidXlight100 <- avoidXlighttemp100[1]
+
+  STDavoidXlight25 <- avoidXlighttemp25[2]
+  STDavoidXlight50 <-avoidXlighttemp50[2]
+  STDavoidXlight75 <-avoidXlighttemp75[2]
+  STDavoidXlight100 <- avoidXlighttemp100[2]
+
+  # attractXlightfile 
+  # alignXlightfile25, 
+  # attractXalign25, 
+
+
+  # attractXavoid25,
+
+  # avoidXalign25, 
+  # avoidXlight25, 
+
+  avoidXlightlog <- c(NA, avoidXlight25, avoidXlight50,avoidXlight75,avoidXlight100)
+  avoidXlightSTDlog <- c(NA, STDavoidXlight25, STDavoidXlight50, STDavoidXlight75, STDavoidXlight100)
+
+  fullPairedBehaviorGraph <- data.frame(
+                          meanAttractXlight=attractXlightlog, STDattractXlight=attractXlightSTDlog, 
+                          meanAlignXlight=alignXlightlog, STDalignXlight =alignXlightSTDlog,  
+                          meanAttractXalign=attractXalignlog, STDattractXalign =attractXalignSTDlog,
+                          meanAttractXavoid=attractXavoidlog, STDattract = attractXavoidSTDlog,
+                          meanAvoidXalign= avoidXalignlog, STDavoidXalign = avoidXalignSTDlog,
+                          meanAvoidXlight= avoidXlightlog, STDavoidXlight = avoidXlightSTDlog ,
+                          group=c(0,25, 50, 75, 100))
+
+  allPairedBehaviorsGraph <<- ggplot(fullPairedBehaviorGraph, aes(group)) + xlab('Strength') + ylab('GSI') + ylim(0.00:1.00) +
+                       geom_line(aes(y = meanAttractXlight, colour = "attract.light"), size=.8)+  geom_point(aes(y=meanAttractXlight), shape=15, size=2) +
+                       geom_line(aes(y = meanAlignXlight, colour = "align.light"), size=.8)+  geom_point(aes(y=meanAlignXlight), shape=16, size=2) +
+                       geom_line(aes(y = meanAttractXalign, colour = "attract.align"), size=.8)+  geom_point(aes(y=meanAttractXalign), shape=17, size=2) +
+                       geom_line(aes(y = meanAttractXavoid, colour = "attract.avoid"), size=.8)+  geom_point(aes(y=meanAttractXavoid), shape=18, size=2) +
+                       geom_line(aes(y = meanAvoidXalign, colour = "avoid.align"), size=.8)+  geom_point(aes(y=meanAvoidXalign), shape=19, size=2) +
+                       geom_line(aes(y = meanAvoidXlight, colour = "avoid.light"), size=.8)+  geom_point(aes(y=meanAvoidXlight), shape=20, size=2)
+  allPairedBehaviorsGraph  + ggtitle("Paired Behavior Interactions")
+  allPairedBehaviorsGraph
+
+
+  # SINGLE BEHAVIORS
   # AVOIDANCE
   avoid25 <- avoidance25result[1]
   avoid50 <- avoidance50result[1]
@@ -194,13 +357,13 @@ graphGSIByStrength <- function(whichPhase) {
   lightSTDLog <- c(NA , stdLight25,stdLight50, stdLight75, stdLight100)
 
 
-  fullGraph <- data.frame(meanAvoid=avoidLog, STDavoid=avoidSTDLog, 
+  fullSingleBehaviorGraph <- data.frame(meanAvoid=avoidLog, STDavoid=avoidSTDLog, 
                           meanLight=lightLog, STDlight =lightSTDLog,  
                           meanAlign=alignLog, STDalign =alignSTDLog,
                           meanAttract=attractLog, STDattract = attractSTDLog,
                           group=c(0,25, 50, 75, 100))
 
-  allBehaviorsGraph <<- ggplot(fullGraph, aes(group)) + xlab('Strength') + ylab('GSI') + ylim(0.00:1.00) +
+  allBehaviorsGraph <<- ggplot(fullSingleBehaviorGraph, aes(group)) + xlab('Strength') + ylab('GSI') + ylim(0.00:1.00) +
                        geom_line(aes(y = meanLight, colour = "Light"), size=.8)+  geom_point(aes(y=meanLight), shape=21, size=2) +
                        geom_line(aes(y = meanAlign, colour = "Align"), size=.8)+  geom_point(aes(y=meanAlign), shape=22, size=2) +
                        geom_line(aes(y = meanAvoid, colour = "Avoid"), size=.8)+  geom_point(aes(y=meanAvoid), shape=23, size=2) +
@@ -411,7 +574,7 @@ calculateBetweenANOVAstats <- function(attractfile25, attractfile50, attractfile
         capture.output(capture_a, file = txtSumName)
         capture_b <- fit
         capture.output(capture_b, file = txtResultsName)
-        postHoc <- TukeyHSD(fit)
+        postHoc <<- TukeyHSD(fit)
         capture_c <- postHoc
         capture.output(capture_c, file = txtPostHocName)
         viewFullFactorANOVA <- boxplot(gsiList ~ strength * behavior, data=tempStatDataframe)
@@ -426,7 +589,148 @@ calculateBetweenANOVAstats <- function(attractfile25, attractfile50, attractfile
         
         graphed 
 
+
 }
+
+
+calculatePairedBetweenANOVAstats <- function(attractXlightfile25, attractXlightfile50, attractXlightfile75, attractXlightfile100, alignXlightfile25, alignXlightfile50, alignXlightfile75, alignXlightfile100, attractXalign25, attractXalign50, attractXalign75, attractXalign100, attractXavoid25, attractXavoid50, attractXavoid75, attractXavoid100, avoidXalign25, avoidXalign50, avoidXalign75, avoidXalign100, avoidXlight25, avoidXlight50, avoidXlight75, avoidXlight100, whichPhase,title1) {
+
+    if(whichPhase == "first") {
+        attractXlighttemp25 <- c(attractXlightfile25$Trial1[1:200], attractXlightfile25$Trial2[1:200], attractXlightfile25$Trial3[1:200])
+        attractXlighttemp50 <- c(attractXlightfile50$Trial1[1:200], attractXlightfile50$Trial2[1:200], attractXlightfile50$Trial3[1:200])
+        attractXlighttemp75 <- c(attractXlightfile75$Trial1[1:200], attractXlightfile75$Trial2[1:200], attractXlightfile75$Trial3[1:200])
+        attractXlighttemp100 <- c(attractXlightfile100$Trial1[1:200], attractXlightfile100$Trial3[1:200], attractXlightfile100$Trial3[1:200])
+
+        alignXlighttemp25 <- c(alignXlightfile25$Trial1[1:200], alignXlightfile25$Trial2[1:200], alignXlightfile25$Trial3[1:200])
+        alignXlighttemp50 <- c(alignXlightfile50$Trial1[1:200], alignXlightfile50$Trial2[1:200], alignXlightfile50$Trial3[1:200])
+        alignXlightemp75 <- c(alignXlightfile75$Trial1[1:200], alignXlightfile75$Trial2[1:200], alignXlightfile75$Trial3[1:200])
+        alignXlighttemp100 <- c(alignXlightfile100$Trial1[1:200], alignXlightfile100$Trial3[1:200], alignXlightfile100$Trial3[1:200])
+
+        attractXaligntemp25 <- c(attractXalign25$Trial1[1:200], attractXalign25$Trial2[1:200], attractXalign25$Trial3[1:200])
+        attractXaligntemp50 <- c(attractXalign50$Trial1[1:200],attractXalign50$Trial2[1:200],attractXalign50$Trial3[1:200])
+        attractXaligntemp75 <- c(attractXalign75$Trial1[1:200], attractXalign75$Trial2[1:200], attractXalign75$Trial3[1:200])
+        attractXaligntemp100 <- c(attractXalign100$Trial1[1:200], attractXalign100$Trial3[1:200], attractXalign100$Trial3[1:200])
+
+        attractXavoidtemp25 <- c(attractXavoid25$Trial1[1:200], attractXavoid25$Trial2[1:200], attractXavoid25$Trial3[1:200])
+        attractXavoidtemp50 <- c(attractXavoid50$Trial1[1:200], attractXavoid50$Trial2[1:200], attractXavoid50$Trial3[1:200])
+        attractXavoidtemp75 <- c(attractXavoid75$Trial1[1:200], attractXavoid75$Trial2[1:200], attractXavoid75$Trial3[1:200])
+        attractXavoidtemp100 <- c(attractXavoid100$Trial1[1:200], attractXavoid100$Trial3[1:200], attractXavoid100$Trial3[1:200])
+
+        avoidXaligntemp25 <- c(avoidXalign25$Trial1[1:200], avoidXalign25$Trial2[1:200], avoidXalign25$Trial3[1:200])
+        avoidXaligntemp50 <- c(avoidXalign50$Trial1[1:200], avoidXalign50$Trial2[1:200], avoidXalign50$Trial3[1:200])
+        avoidXaligntemp75 <- c(avoidXalign75$Trial1[1:200], avoidXalign75$Trial2[1:200], avoidXalign75$Trial3[1:200])
+        avoidXaligntemp100 <- c(avoidXalign100$Trial1[1:200], avoidXalign100$Trial3[1:200], avoidXalign100$Trial3[1:200])
+
+        avoidXlighttemp25 <- c(avoidXlight25$Trial1[1:200], avoidXlight25$Trial2[1:200], avoidXlight25$Trial3[1:200])
+        avoidXlighttemp50 <- c(avoidXlight50$Trial1[1:200], avoidXlight50$Trial2[1:200], avoidXlight50$Trial3[1:200])
+        avoidXlighttemp75 <- c(avoidXlight75$Trial1[1:200], avoidXlight75$Trial2[1:200], avoidXlight75$Trial3[1:200])
+        avoidXlighttemp100 <- c(avoidXlight100$Trial1[1:200], avoidXlight100$Trial3[1:200], avoidXlight100$Trial3[1:200])
+
+
+        tempStrength <- c(rep("str25",1800),rep("str25",1800),rep("str25", 1800),rep("str25",1800) ,rep("str25",1800) ,rep("str25",1800) ,
+                       rep("str50",1800),rep("str50",1800),rep("str50", 1800),rep("str50",1800), rep("str50",1800),rep("str50",1800),
+                       rep("str75",1800),rep("str75",1800),rep("str75", 1800),rep("str75",1800), rep("str75",1800),rep("str75",1800),
+                       rep("str100",1800),rep("str100",1800),rep("str100", 1800),rep("str100",1800), rep("str100",1800), rep("str100",1800))
+        tempLabel <- c(rep("attractXlight",600),rep("alignXlight",600),rep("attractXalign", 600),rep("attractionXavoid",600), rep("avoidXalign",600),rep("avoidXlight",600),
+                       rep("attractXlight",600),rep("alignXlight",600),rep("attractXalign", 600),rep("attractionXavoid",600), rep("avoidXalign",600),rep("avoidXlight",600),
+                       rep("attractXlight",600),rep("alignXlight",600),rep("attractXalign", 600),rep("attractionXavoid",600), rep("avoidXalign",600),rep("avoidXlight",600),
+                       rep("attractXlight",600),rep("alignXlight",600),rep("attractXalign", 600),rep("attractionXavoid",600), rep("avoidXalign",600),rep("avoidXlight",600) )
+        tempTotal <- c(attractXlighttemp25[1:600], alignXlighttemp25[1:600], attractXaligntemp25[1:600],attractXavoidtemp25[1:600],avoidXaligntemp25[1:600],avoidXlighttemp25[1:600],
+                        attractXlighttemp50[1:600], alignXlighttemp50[1:600], attractXaligntemp50[1:600],attractXavoidtemp50[1:600],avoidXaligntemp50[1:600],avoidXlighttemp50[1:600],
+                        attractXlighttemp75[1:600], alignXlightemp75[1:600], attractXaligntemp75[1:600],attractXavoidtemp75[1:600],avoidXaligntemp75[1:600],avoidXlighttemp75[1:600],
+                        attractXlighttemp100[1:600], alignXlighttemp100[1:600], attractXaligntemp100[1:600],attractXavoidtemp100[1:600],avoidXaligntemp100[1:600],avoidXlighttemp100[1:600])
+
+      } else if (whichPhase =="second") {
+
+        attractXlighttemp25 <- c(attractXlightfile25$Trial1[200:800], attractXlightfile25$Trial2[200:800], attractXlightfile25$Trial3[200:800])
+        attractXlighttemp50 <- c(attractXlightfile50$Trial1[200:800], attractXlightfile50$Trial2[200:800], attractXlightfile50$Trial3[200:800])
+        attractXlighttemp75 <- c(attractXlightfile75$Trial1[200:800], attractXlightfile75$Trial2[200:800], attractXlightfile75$Trial3[200:800])
+        attractXlighttemp100 <- c(attractXlightfile75$Trial1[200:800], attractXlightfile75$Trial3[200:800], attractXlightfile75$Trial3[200:800])
+        
+        alignXlighttemp25 <- c(alignXlightfile25$Trial1[200:800], alignXlightfile25$Trial2[200:800], alignXlightfile25$Trial3[200:800])
+        alignXlighttemp50 <- c(alignXlightfile50$Trial1[200:800], alignXlightfile50$Trial2[200:800], alignXlightfile50$Trial3[200:800])
+        alignXlightemp75 <- c(alignXlightfile75$Trial1[200:800], alignXlightfile75$Trial2[200:800], alignXlightfile75$Trial3[200:800])
+        alignXlighttemp100 <- c(alignXlightfile100$Trial1[200:800], alignXlightfile100$Trial3[200:800], alignXlightfile100$Trial3[200:800])
+
+        attractXaligntemp25 <- c(attractXalign25$Trial1[200:800], attractXalign25$Trial2[200:800], attractXalign25$Trial3[200:800])
+        attractXaligntemp50 <- c(attractXalign50$Trial1[200:800],attractXalign50$Trial2[200:800],attractXalign50$Trial3[200:800])
+        attractXaligntemp75 <- c(attractXalign75$Trial1[200:800], attractXalign75$Trial2[200:800], attractXalign75$Trial3[200:800])
+        attractXaligntemp100 <- c(attractXalign100$Trial1[200:800], attractXalign100$Trial3[200:800], attractXalign100$Trial3[200:800])
+
+        attractXavoidtemp25 <- c(attractXavoid25$Trial1[200:800], attractXavoid25$Trial2[200:800], attractXavoid25$Trial3[200:800])
+        attractXavoidtemp50 <- c(attractXavoid50$Trial1[200:800], attractXavoid50$Trial2[200:800], attractXavoid50$Trial3[200:800])
+        attractXavoidtemp75 <- c(attractXavoid75$Trial1[200:800], attractXavoid75$Trial2[200:800], attractXavoid75$Trial3[200:800])
+        attractXavoidtemp100 <- c(attractXavoid100$Trial1[200:800], attractXavoid100$Trial3[200:800], attractXavoid100$Trial3[200:800])
+
+        avoidXaligntemp25 <- c(avoidXalign25$Trial1[200:800], avoidXalign25$Trial2[200:800], avoidXalign25$Trial3[200:800])
+        avoidXaligntemp50 <- c(avoidXalign50$Trial1[200:800], avoidXalign50$Trial2[200:800], avoidXalign50$Trial3[200:800])
+        avoidXaligntemp75 <- c(avoidXalign75$Trial1[200:800], avoidXalign75$Trial2[200:800], avoidXalign75$Trial3[200:800])
+        avoidXaligntemp100 <- c(avoidXalign100$Trial1[200:800], avoidXalign100$Trial3[200:800], avoidXalign100$Trial3[200:800])
+
+        avoidXlighttemp25 <- c(avoidXlight25$Trial1[200:800], avoidXlight25$Trial2[200:800], avoidXlight25$Trial3[200:800])
+        avoidXlighttemp50 <- c(avoidXlight50$Trial1[200:800], avoidXlight50$Trial2[200:800], avoidXlight50$Trial3[200:800])
+        avoidXlighttemp75 <- c(avoidXlight75$Trial1[200:800], avoidXlight75$Trial2[200:800], avoidXlight75$Trial3[200:800])
+        avoidXlighttemp100 <- c(avoidXlight100$Trial1[200:800], avoidXlight100$Trial3[200:800], avoidXlight100$Trial3[200:800])
+
+
+
+        tempLabel <- c(rep("attractXlight",600),rep("alignXlight",600),rep("attractXalign", 600),rep("attractionXavoid",600), rep("avoidXalign",600),rep("avoidXlight",600),
+                       rep("attractXlight",600),rep("alignXlight",600),rep("attractXalign", 600),rep("attractionXavoid",600), rep("avoidXalign",600),rep("avoidXlight",600),
+                       rep("attractXlight",600),rep("alignXlight",600),rep("attractXalign", 600),rep("attractionXavoid",600), rep("avoidXalign",600),rep("avoidXlight",600),
+                       rep("attractXlight",600),rep("alignXlight",600),rep("attractXalign", 600),rep("attractionXavoid",600), rep("avoidXalign",600),rep("avoidXlight",600) )
+
+        tempStrength <- c(rep("str25",1800),rep("str25",1800),rep("str25", 1800),rep("str25",1800) ,rep("str25",1800) ,rep("str25",1800) ,
+                       rep("str50",1800),rep("str50",1800),rep("str50", 1800),rep("str50",1800), rep("str50",1800),rep("str50",1800),
+                       rep("str75",1800),rep("str75",1800),rep("str75", 1800),rep("str75",1800), rep("str75",1800),rep("str75",1800),
+                       rep("str100",1800),rep("str100",1800),rep("str100", 1800),rep("str100",1800), rep("str100",1800), rep("str100",1800))
+        # tempTotal <- c(temp25[1:1800],temp50[1:1800],temp75[1:1800],temp100[1:1800])
+
+        tempTotal <- c(attractXlighttemp25[1:1800], alignXlighttemp25[1:1800], attractXaligntemp25[1:1800],attractXavoidtemp25[1:1800],avoidXaligntemp25[1:1800],avoidXlighttemp25[1:1800],
+                        attractXlighttemp50[1:1800], alignXlighttemp50[1:1800],attractXaligntemp50[1:1800],attractXavoidtemp50[1:1800],avoidXaligntemp50[1:1800],avoidXlighttemp50[1:1800],
+                        attractXlighttemp75[1:1800], alignXlightemp75[1:1800], attractXaligntemp75[1:1800],attractXavoidtemp75[1:1800],avoidXaligntemp75[1:1800],avoidXlighttemp75[1:1800],
+                        attractXlighttemp100[1:1800], alignXlighttemp100[1:1800], attractXaligntemp100[1:1800],attractXavoidtemp100[1:1800],avoidXaligntemp100[1:1800],avoidXlighttemp100[1:1800])
+
+
+      }  
+
+
+      
+      # length(tempTotal)
+      # if(betweenORwithin == "within") {
+      tempStatDataframe <- data.frame(
+        behavior = tempLabel,
+        gsiList = tempTotal,
+        strength = tempStrength
+      )
+
+        fit <- aov(gsiList ~ strength * behavior, data=tempStatDataframe)
+
+        txtSumName <- paste("./",title1,"_Anova_summary.txt")
+        txtResultsName <- paste("./",title1,"_Anova_results.txt")
+        txtPostHocName <- paste("./",title1,"_Anova_PostHoc.txt")
+
+        capture_a <- summary(fit)
+        # str(capture_a)
+        capture.output(capture_a, file = txtSumName)
+        capture_b <- fit
+        capture.output(capture_b, file = txtResultsName)
+        postHoc <<- TukeyHSD(fit)
+        capture_c <- postHoc
+        capture.output(capture_c, file = txtPostHocName)
+        viewFullFactorANOVA <- boxplot(gsiList ~ strength * behavior, data=tempStatDataframe)
+        
+        viewFullFactorANOVA
+
+        printThis <<- summary(fit)[[1]][["Pr(>F)"]]
+        printThis
+        fit
+        postHoc
+        graphed <- plot(postHoc)
+        
+        graphed 
+
+}
+
 
 
 PerformWithinStats <- function(phase) {
@@ -439,7 +743,7 @@ PerformWithinStats <- function(phase) {
 } 
 
 
-PerformBetweenStats <- function(phase) {
+PerformBetweenStats <- function(phase, pairedORsingle) {
   # attract align light avoidance boid 
   # calculateBetweenANOVAstats(
   #   attraction_25.data,attraction_5.data,attraction_75.data,attraction_100.data,
@@ -448,25 +752,38 @@ PerformBetweenStats <- function(phase) {
   #   avoidance_25.data,avoidance_5.data,avoidance_75.data,avoidance_100.data,
   #   boid_25.data,boid_5.data,boid_75.data,boid_100.data, phase, "WithinPhase_CrossBehavior"
   #   )
+  if(pairedORsingle=="single") {
     calculateBetweenANOVAstats(
-    attraction_25.data,attraction_5.data,attraction_75.data,attraction_100.data,
-    alignment_25.data,alignment_5.data,alignment_75.data,alignment_100.data, 
-    light_25.data,light_5.data, light_75.data,light_100.data, 
-    avoidance_25.data,avoidance_5.data,avoidance_75.data,avoidance_100.data,
-    boid_25.data,boid_5.data,boid_75.data,boid_100.data, phase, "WithinPhase_CrossBehavior"
+      attraction_25.data,attraction_5.data,attraction_75.data,attraction_100.data,
+      alignment_25.data,alignment_5.data,alignment_75.data,alignment_100.data, 
+      light_25.data,light_5.data, light_75.data,light_100.data, 
+      avoidance_25.data,avoidance_5.data,avoidance_75.data,avoidance_100.data,
+      boid_25.data,boid_5.data,boid_75.data,boid_100.data, phase, "WithinPhase_CrossBehavior"
     )
+    # attractXlightfile25, attractXlightfile50, attractXlightfile75, attractXlightfile75, alignXlightfile25, alignXlightfile50, alignXlightfile75, alignXlightfile100, attractXalign25, attractXalign50, attractXalign75, attractXalign100, attractXavoid25, attractXavoid50, attractXavoid75, attractXavoid100, avoidXalign25, avoidXalign50, avoidXalign75, avoidXalign100, avoidXlight25, avoidXlight50, avoidXlight75, avoidXlight100, whichPhase,title1
+  } else if(pairedORsingle=="paired") {
+    # attractXlightfile25, , alignXlightfile25,  attractXalign25, attractXavoid25,  avoidXalign25,  avoidXlight25, , whichPhase,title1
+    calculatePairedBetweenANOVAstats(
+      attractXlight_25.data, attractXavoid_5.data, attractXavoid_75.data, attractXavoid_100.data,
+      alignXlight_25.data, alignXlight_5.data, alignXlight_75.data, alignXlight_100.data,
+      attractXalign_25.data, attractXalign_5.data, attractXalign_75.data, attractXalign_100.data,
+      attractXavoid_25.data, attractXavoid_5.data, attractXavoid_75.data, attractXavoid_100.data,
+      avoidXalign_25.data, avoidXalign_5.data, avoidXalign_75.data, avoidXalign_100.data,
+      avoidXlight_25.data, avoidXlight_5.data, avoidXlight_75.data, avoidXlight_100.data, phase, "WithinPase_InteractionBehaviors"
+      )
+  }
+    
 }  
 
 
 
-PerformBetweenStats("second")
+PerformBetweenStats("second", "paired")
 # printThis
 # PerformWithinStats("second")
 
+graphGSIByStrength("second")
+allPairedBehaviorsGraph
 
-
-
-# graphGSIByStrength("second")
 # alignPlot
 # attractionPlot
 # avoidPlot
