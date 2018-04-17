@@ -8,7 +8,7 @@
 #   The time.stepper() function at the end of the script takes in the number of iterations you want to run the model for.    
 #
 #   Rules for swarming
-#     1) Center of Mass: Boids are attracted to the center of the overall swarm.
+#     1) social attraction: Boids are attracted to the center of the overall swarm.
 #     2) Avoidance rule: Boids avoid collision with other boids by avoiding coming within
 #        a certain distance of one another.
 #     3) Match Velocity: Boids can sense the average velocity of the swarm and do their 
@@ -136,15 +136,15 @@ find.center <- function() {
   averageX <- totalX / nIndividuals
   averageY <- totalY / nIndividuals
 
-  centerMass <- c(averageX, averageY)
+  centerAttraction <- c(averageX, averageY)
 
-  return(centerMass)
+  return(centerAttraction)
 
 }
 
 
-# RULE 1: calculate the swarm's center of mass 
-center.of.mass <- function(boid, count) {
+# RULE 1: calculate the swarm's social attraction 
+social.attraction <- function(boid, count) {
 
   totalX <- 0
   totalY <- 0
@@ -157,10 +157,10 @@ center.of.mass <- function(boid, count) {
   averageX <- totalX / nIndividuals
   averageY <- totalY / nIndividuals
 
-  # calculate the the adjusted X,Y velocity paramter to move the Boid in the direction of the center of mass.
-  centerMass <- c(((averageX - boid[1])/100 ), ((averageY - boid[2])/100))
-  # print(centerMass)
-  return(centerMass)
+  # calculate the the adjusted X,Y velocity paramter to move the Boid in the direction of the social attraction.
+  centerAttraction <- c(((averageX - boid[1])/100 ), ((averageY - boid[2])/100))
+  # print(centerAttraction)
+  return(centerAttraction)
 }
 
 
@@ -176,7 +176,7 @@ avoidance.rule <- function(boid, count) {
       # Check to see if any other individuals are within 100 spaces
       if((abs( arena.Data$xPosition[var] - boid[1]) < 100) && (abs(arena.Data$yPosition[var] - boid[2]) < 100)) {
         b.position <- c(arena.Data$xPosition[var], arena.Data$yPosition[var])
-        # If there are individuals within this space, create a negative value to change the position of the BOID
+        # If there are individuals within this space, create a negative value to change the position of the Boid
         correctedCourse <- correctedCourse - (b.position - boid)
       } 
     }
@@ -219,7 +219,7 @@ compute.next.pos <- function() {
       
       # Rule 1: find the average position of the swarm and calculate the individual's velocity 
       # parameter that determines how much it moves toward the center.
-      centerMassRule <- center.of.mass(currentIndividualLoc, var)
+      social.attraction.rule <- social.attraction(currentIndividualLoc, var)
       # Rule 2: calculate the velocity parameter that ensures the individual avoids moving too close
       # to any one idividual within the swarm.
       avoidanceRule <- avoidance.rule(currentIndividualLoc, var)
@@ -232,8 +232,8 @@ compute.next.pos <- function() {
       currentIndividualLoc <- currentIndividualLoc + c(xVelocity[var],yVelocity[var])
 
       # Change the individuals velocity as dedtermined by the 3 rules calculated above.
-      xVelocity[var] <<- xVelocity[var] + centerMassRule[1] + avoidanceRule[1] + velocityRule[1]
-      yVelocity[var] <<- yVelocity[var] + centerMassRule[2] + avoidanceRule[2] + velocityRule[2]
+      xVelocity[var] <<- xVelocity[var] + social.attraction.rule[1] + avoidanceRule[1] + velocityRule[1]
+      yVelocity[var] <<- yVelocity[var] + social.attraction.rule[2] + avoidanceRule[2] + velocityRule[2]
 
       # Change the individuals location
       arena.Data$xPosition[var] <<- currentIndividualLoc[1]
